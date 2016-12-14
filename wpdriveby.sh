@@ -22,13 +22,13 @@ function cleanup() {
 
 function wplogin_find() {
   echo -e "\nTrawling access-logs for wp-login.php..."
-  grep wp-login.php $logDir | awk '{print $1}' | sort -n | uniq -c | sort -n | \
+  grep wp-login.php $logDir | awk '{print $2}' | sort -n | uniq -c | sort -n | \
   tail -50 | awk '{if($1>100)print "Hits:",$1, "IP:",$2}' | tee -a "firstgrep.txt"
 }
 
 function xmlrpc_find()  {
   echo -e "\nTrawling access-logs for xmlrpc.php hits..."
-  grep ''$hourago'\|'$now'' $logDir | grep 'xmlrpc.php' | awk '{print $1}' | sort -n | \
+  grep ''$hourago'\|'$now'' $logDir | grep 'xmlrpc.php' | awk '{print $2}' | sort -n | \
   uniq -c | sort -n | tail -50 | awk '{if($1>100)print "Hits:",$1, "IP:",$2}' | tee -a "firstgrep.txt"
 }
 
